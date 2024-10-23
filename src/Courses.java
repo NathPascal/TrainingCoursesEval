@@ -4,17 +4,18 @@ public class Courses {
 	private String courName;
 	private String courDescription;
 	private int duration;
-	private boolean format;
+	private String format;
 	private double price;
+	private int idCategory;
 	
-	public Courses(int idCourses, String courName, String courDescription, int duration, boolean format, double price) {
-		super();
+	public Courses(int idCourses, String courName, String courDescription, int duration, String format, double price, int idCategory) {
 		this.idCourses = idCourses;
 		this.courName = courName;
 		this.courDescription = courDescription;
 		this.duration = duration;
 		this.format = format;
 		this.price = price;
+		this.idCategory = idCategory;
 	}
 
 	public int getIdCourses() {
@@ -49,11 +50,11 @@ public class Courses {
 		this.duration = duration;
 	}
 
-	public boolean isFormat() {
+	public String getFormat() {
 		return format;
 	}
 
-	public void setFormat(boolean format) {
+	public void setFormat(String format) {
 		this.format = format;
 	}
 
@@ -64,11 +65,20 @@ public class Courses {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	public int getIdCategory() {
+		return idCategory;
+	}
+	
+	public void setIdCategory(int idCategory) {
+		this.idCategory = idCategory;
+	}
 
 	@Override
 	public String toString() {
-		return idCourses + ", " + courName + ", Description=" + courDescription
-				+ ", Durée: " + duration + ", Format: " + format + ", Tarif: " + price;
+		return idCourses + "= " + courName + ", Description: " + courDescription
+				+ ", Durée: " + duration + ", Format: " + format + ", Tarif: " + price
+				+ " , catégorie: " + idCategory;
 	}
 	
 	
