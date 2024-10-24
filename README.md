@@ -1,6 +1,6 @@
 Le Use Case : voir fichier **UseCaseDiagram.jpg**    
 Le diagramme de classe: voir fichier **ClassDiagram.jpg**  
-Le diagramme de séquence: voir le fichier  
+Le diagramme de séquence: voir le fichier: voir fichier **SequenceDiagram.jpg** 
 
 
 **Spécifications fonctionnelles** 
@@ -27,15 +27,7 @@ L’utilisateur non connecté peut :
 -	Créer un compte utilisateur
 -	Se connecter à son compte login/password
 
-L’utilisateur connecté peut :
--	Afficher toutes les formations disponibles
--	Afficher toutes les formations par catégorie ou non
--	Afficher toutes les formations contenant un mot-clé
--	Afficher toutes les formations étant en présentiel
--	Afficher toutes les formations étant en distanciel
--	Constituer un panier de commandes
--	Ajouter des formations dans le panier
--	Retirer des formations dans le panier
+L’utilisateur connecté peut (en plus de ce que fait l'utilisateur connecté):
 -	Passer commande à tout instant
 -	Réaliser plusieurs commandes pour différents clients
 

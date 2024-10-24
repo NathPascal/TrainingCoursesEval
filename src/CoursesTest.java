@@ -1,81 +1,58 @@
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+
+import fr.fms.dao.BddConnection;
+import fr.fms.dao.CoursesDao;
+import fr.fms.entities.Courses;
 
 public class CoursesTest {
 	
-	private static final String url = "jdbc:mariadb://localhost:3306/coursesshop"; 
-	private static final String login = "root";
-	private static final String password = "fms2024";
-
+	
 	public static void main(String[] args) throws Exception {
 		
-		//ArrayList<Categories> categories = new ArrayList<>();
-	
-			try(Connection connection = DriverManager.getConnection(url,login,password)) { 
-				
-				displayReadAllCourses(connection); //affiche toutes les formations
-				
-				//displayCoursesByCategory(connection); //affiche les formations par catégorie
-				
-				
-			}
-				
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
+		Connection connection = BddConnection.connection();
+		CoursesDao coursesDao = new CoursesDao(connection); 
 		
-	
-	//readAll by Category
-		//try(Connection connection = DriverManager.getConnection(url,login,password)) {
-			//String strSql = "SELECT * FROM T_Articles where idCategory= ";		
-				//try(Statement statement = connection.createStatement()){
-					//try(ResultSet resultSet = statement.executeQuery(strSql)){ 			
-						//while(resultSet.next()) {
-							//int rsIdCourse = resultSet.getInt(1);
-							//String rsCourName = resultSet.getString(2);
-							//String rsCourDescription = resultSet.getString(3);
-							//int rsDuration = resultSet.getInt(4);
-							//String rsFormat = resultSet.getString(5);
-							//double rsPrice = resultSet.getDouble(6);
-							//int rsIdCategory = resultSet.getInt(7);
-							//courses.add((new Courses(rsIdCourse,rsCourName,rsCourDescription,rsDuration,rsFormat,rsPrice,rsIdCategory)));						
-							//}	
-						//}
-					//} catch (SQLException e) {
-					//	e.printStackTrace();
-				//}			
-				//for(Courses a: courses)
-					//System.out.println(a);
-			//}
-		//}
+		//Afficher toutes les formations
+		ArrayList<Courses> courses = coursesDao.readAll();
+		
+		System.out.println("Toutes les formations diponibles: \n");
+	    for (Courses cour : courses) System.out.println(cour);		
+		System.out.println("\n-----------------------------------------\n");		
+		//Afficher les formations par catégorie
+	    
+		int categoryId = 1;  // exemple
+		ArrayList<Courses> coursesByCategory = coursesDao.readAllByCat(categoryId);
+		
+		System.out.println("Les formations diponibles selon la catégorie choisie: \n");
+		for (Courses course : coursesByCategory) System.out.println(course);
+		System.out.println("\n-----------------------------------------\n");
+				
+		// Afficher les formations contenant un mot clé
+		
+		 String keyword = "Java";  // exemple
+		 ArrayList<Courses> coursesByKeyword = coursesDao.readAllByKeyword(keyword);
+		 
+		 System.out.println("Les formations diponibles selon le mot-clé recherché: \n");
+	     for (Courses course : coursesByKeyword) System.out.println(course);
+	     System.out.println("\n-----------------------------------------\n");
+
+	     // Afficher les formations en présentiel
+	       
+	     String format = "Presentiel";  // exemple
+	     ArrayList<Courses> coursesByFormat = coursesDao.readAllByFormat(format);
+	        
+	     System.out.println("Les formations diponibles selon le format choisi: \n");
+	     for (Courses course : coursesByFormat) System.out.println(course);
+	     System.out.println("\n-----------------------------------------");
+	        
+	}
 }
-	public static void displayReadAllCourses(Connection connection) throws Exception {
-		ArrayList <Courses> courses = new ArrayList<>();
-		String strSql = "SELECT * FROM T_Courses";
-		try (Statement statement = connection.createStatement()){
-			try(ResultSet resultSet = statement.executeQuery(strSql)){
-				while(resultSet.next()) {
-					int rsIdCourse = resultSet.getInt(1);
-					String rsCourName = resultSet.getString(2);
-					String rsCourDescription = resultSet.getString(3);
-					int rsDuration = resultSet.getInt(4);
-					String rsFormat = resultSet.getString(5);
-					double rsPrice = resultSet.getDouble(6);
-					int rsIdCategory = resultSet.getInt(7);
-					courses.add((new Courses(rsIdCourse,rsCourName,rsCourDescription,rsDuration,rsFormat,rsPrice,rsIdCategory)));
-				}
-				
-			}
-			
-		}
-		for(Courses a: courses)
-			System.out.println(a);
-	}
+	       	         
+
+	            
+	           
+							
+	
+
 		
-	}
-//}
