@@ -42,9 +42,10 @@ public class CoursesDao {
 	
 	public ArrayList<Courses> readAllByCat(int idCategory) {
 		ArrayList<Courses> coursesByCat = new ArrayList<>();
-		String strSql = "SELECT * FROM T_Courses where idCategory=" + idCategory;		
-		try(Statement statement = connection.createStatement()){
-			try(ResultSet resultSet = statement.executeQuery(strSql)){ 			
+		String strSql = "SELECT * FROM T_Courses where idCategory= ?";		
+		try (PreparedStatement preparedStatement = connection.prepareStatement(strSql)) {
+	        preparedStatement.setInt(1, idCategory);
+	        try (ResultSet resultSet = preparedStatement.executeQuery()){ 			
 				while(resultSet.next()) {
 					int rsIdCourse = resultSet.getInt(1);
 					String rsCourName = resultSet.getString(2);
